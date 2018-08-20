@@ -3,8 +3,12 @@ RIME_ROOT = $(CURDIR)
 sharedir = $(DESTDIR)/usr/share
 bindir = $(DESTDIR)/usr/bin
 
-.PHONY: all thirdparty clean librime librime-static install-librime uninstall-librime release install uninstall debug install-debug uninstall-debug test
+.PHONY: all thirdparty clean librime librime-static install-librime uninstall-librime release install uninstall debug install-debug uninstall-debug test zoetis
 
+zoetis:
+	cmake -H. -Bbuild -DCMAKE_INSTALL_PREFIX=./build/install -DCMAKE_BUILD_TYPE=Release -DBUILD_TEST=OFF -DBUILD_DATA=TRUE -DLIB_INSTALL_DIR=lib -DENABLE_LOGGING=OFF -DCMAKE_TOOLCHAIN_FILE=../arm-gnueabihf.toolchain.cmake
+	cmake --build build --target package
+	
 all: release
 
 thirdparty:

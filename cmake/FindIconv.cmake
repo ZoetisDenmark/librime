@@ -14,7 +14,7 @@ FIND_PATH( ICONV_INCLUDE_DIR NAMES iconv.h )
 MARK_AS_ADVANCED( ICONV_INCLUDE_DIR )
 
 # Look for the library
-FIND_LIBRARY( ICONV_LIBRARY NAMES iconv )
+FIND_LIBRARY( ICONV_LIBRARY NAMES iconv iconv_hook )
 MARK_AS_ADVANCED( ICONV_LIBRARY )
 
 # Copy the result to output variables

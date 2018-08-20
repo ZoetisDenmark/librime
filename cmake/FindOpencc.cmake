@@ -1,6 +1,7 @@
 set(_opencc_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES})
 
 find_path(Opencc_INCLUDE_PATH opencc/opencc.h)
+message("Opencc inc plath - ${Opencc_INCLUDE_PATH}") 
 
 if (Opencc_STATIC)
   if (WIN32)
@@ -9,7 +10,7 @@ if (Opencc_STATIC)
     set(CMAKE_FIND_LIBRARY_SUFFIXES .a ${CMAKE_FIND_LIBRARY_SUFFIXES})
   endif (WIN32)
 endif (Opencc_STATIC)
-find_library(Opencc_LIBRARY NAMES opencc)
+find_library(Opencc_LIBRARY NAMES opencc libopencc)
 if(Opencc_INCLUDE_PATH AND Opencc_LIBRARY)
   set(Opencc_FOUND TRUE)
 endif(Opencc_INCLUDE_PATH AND Opencc_LIBRARY)

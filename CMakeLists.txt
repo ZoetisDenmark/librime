@@ -18,7 +18,7 @@ option(ENABLE_LOGGING "Enable logging with google-glog library" ON)
 option(BOOST_USE_CXX11 "Boost has been built with C++11 support" OFF)
 option(BOOST_USE_SIGNALS2 "Boost use signals2 instead of signals" ON)
 
-SET(rime_data_dir "/share/rime-data" CACHE STRING "Target directory for Rime data")
+SET(rime_data_dir "share/rime-data" CACHE STRING "Target directory for Rime data")
 
 if(WIN32)
   set(ext ".exe")
@@ -155,7 +155,7 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Linux|FreeBSD|DragonFly")
   set(exec_prefix "${CMAKE_INSTALL_PREFIX}")
   set(bindir "${exec_prefix}/bin")
   set(libdir "${LIB_INSTALL_DIR}")
-  set(pkgdatadir "${prefix}${rime_data_dir}")
+  set(pkgdatadir "${rime_data_dir}")
   set(includedir "${CMAKE_INSTALL_PREFIX}/include")
   configure_file(
       ${PROJECT_SOURCE_DIR}/rime.pc.in
@@ -167,9 +167,10 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Linux|FreeBSD|DragonFly")
   install(FILES cmake/RimeConfig.cmake DESTINATION share/cmake/rime)
 
   if(BUILD_DATA)
-    file(GLOB preset_data_files ${PROJECT_SOURCE_DIR}/data/preset/*.yaml)
+    file(GLOB preset_data_files ${PROJECT_SOURCE_DIR}/data/minimal/*.yaml)
     install(FILES ${preset_data_files} DESTINATION ${pkgdatadir})
   endif()
+  
 endif()
 
 if(BUILD_SHARED_LIBS)
@@ -191,3 +192,8 @@ add_subdirectory(tools)
 if(GTEST_FOUND)
   add_subdirectory(test)
 endif()
+
+set(CPACK_PACKAGE_VERSION_MAJOR 1)
+set(CPACK_PACKAGE_VERSION_MINOR 3)
+set(CPACK_PACKAGE_VERSION_REVISION 1)
+include(CPack)
